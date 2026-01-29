@@ -39,11 +39,13 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const API_URL = 'https://idv-dashboard-2.onrender.com';
+
   // Fetch available filter options
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/filters');
+        const response = await axios.get(`${API_URL}/api/filters`);
         setAvailableFilters(response.data);
       } catch (err) {
         console.error('Error fetching filters:', err);
@@ -66,8 +68,8 @@ function App() {
         });
 
         const [dataResponse, analyticsResponse] = await Promise.all([
-          axios.get(`http://localhost:8000/api/data?${params}`),
-          axios.get(`http://localhost:8000/api/analytics?${params}`)
+          axios.get(`${API_URL}/api/data?${params}`),
+          axios.get(`${API_URL}/api/analytics?${params}`)
         ]);
 
         setData(dataResponse.data);
